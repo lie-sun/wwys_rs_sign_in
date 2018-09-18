@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>签到</title>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -149,23 +148,25 @@
                 return false;
             }
             $.ajax({
-                url: "http://192.168.1.142:8081/sws/webapp/WebInterviewController/interviewSignIn.htm",
+                url: "webapp/WebInterviewController/interviewSignIn.htm",
                 data: {
                     name: names,
                     tel: phone
                 },
                 type: 'POST',
                 timeout: 6000,
-                dataType: "jsonp", //跨域json请求一定是jsonp
-                jsonp: "callback",
-                // jsonpCallback: "successCallback",
+
                 success: (res) => {
-                    if(res.state == 0){
+                    res = JSON.parse(res);
+                    console.log(res);
+                    if (res.state == 0) {
                         location.href = 'success.html';
+                    } else {
+                        alert("您未预约");
                     }
                 },
                 error: (err) => {
-                    location.href = 'success.html';
+                    console.log(err);
                 }
             })
         })
