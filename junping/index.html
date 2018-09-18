@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport"-->
+    <!--content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>签到</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(240, 240, 240);
+            overflow: hidden;
+            background: url(./bg.jpg) no-repeat;
+        }
+
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .container {
+            width: 70%;
+            padding: 10px 15px;
+            height: auto;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 5px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        input {
+            box-sizing: border-box;
+            padding-left: 10px;
+            height: 40px;
+            border-radius: 3px;
+            width: 90%;
+            margin: auto;
+            border: 1px solid #d2d2d2;
+            resize: none;
+            outline: none;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .submit {
+            width: 90%;
+            border: none;
+            border-radius: 3px;
+            height: 40px;
+            color: #fff;
+            background: #CA1F1F;
+            margin: auto;
+        }
+
+        :-moz-placeholder {
+            color: #ccc;
+        }
+
+        ::placeholder {
+            color: #ccc;
+        }
+
+        :-ms-input-placeholder {
+            color: #ccc;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #ccc;
+        }
+
+        .qd {
+            width: 100%;
+            display: block;
+            padding: 0;
+            margin: 90px auto 50px;
+
+        }
+
+        /**
+        iPad 横屏
+         */
+        @media screen
+        and (min-device-width: 768px)
+        and (max-device-width: 1024px)
+        and (orientation: landscape) {
+            .container {
+                width: 90%;
+                margin-top: 10%;
+            }
+
+            input {
+                height: 45px;
+            }
+        }
+
+        @media screen
+        and (min-device-width: 1024px)
+        and (max-device-width: 1366px)
+        and (orientation: landscape) {
+            .container {
+                width: 90%;
+            }
+
+            input {
+                height: 60px;
+                margin-top: 10%;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <img src="./qd.png" alt="" class="qd">
+    <div class="container">
+        <p><input type="text" placeholder="姓名" id="name"></p>
+        <p><input type="tel" placeholder="手机号" maxlength="11" id="phone"></p>
+        <p>
+            <button class="submit">签到</button>
+        </p>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $(".submit").on("click", function () {
+            var names = $("#name").val();
+            var namereg = /^[\u4E00-\u9FA5]{2,4}$/;
+            if (!namereg.test(names)) {
+                alert("姓名格式不正确");
+                return false;
+            }
+            var phone = $("#phone").val();
+            var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+            if (!myreg.test(phone)) {
+                alert("手机号不正确");
+                return false;
+            }
+            $.ajax({
+                url: "http://192.168.1.142:8081/sws/webapp/WebInterviewController/interviewSignIn.htm",
+                data: {
+                    name: names,
+                    tel: phone
+                },
+                type: 'POST',
+                timeout: 6000,
+                // dataType: "jsonp", //跨域json请求一定是jsonp
+                // jsonp: "callback",
+                // jsonpCallback: "successCallback",
+                success: (res) => {
+                    console.log(res)
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+
+            })
+
+        })
+    })
+</script>
+
+</html>
