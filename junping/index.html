@@ -3,9 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <!--<meta name="viewport"-->
-    <!--content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>签到</title>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -19,6 +18,7 @@
             background: rgb(240, 240, 240);
             overflow: hidden;
             background: url(./bg.jpg) no-repeat;
+            font-size: 18px;
         }
 
         li {
@@ -46,20 +46,22 @@
             width: 90%;
             margin: auto;
             border: 1px solid #d2d2d2;
-            resize: none;
+           
             outline: none;
             -webkit-appearance: none;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            resize: none;
         }
 
         .submit {
             width: 90%;
             border: none;
             border-radius: 3px;
-            height: 40px;
+            height: 50px;
             color: #fff;
             background: #CA1F1F;
             margin: auto;
+            font-size: 19px;
         }
 
         :-moz-placeholder {
@@ -154,18 +156,18 @@
                 },
                 type: 'POST',
                 timeout: 6000,
-                // dataType: "jsonp", //跨域json请求一定是jsonp
-                // jsonp: "callback",
+                dataType: "jsonp", //跨域json请求一定是jsonp
+                jsonp: "callback",
                 // jsonpCallback: "successCallback",
                 success: (res) => {
-                    console.log(res)
+                    if(res.state == 0){
+                        location.href = 'success.html';
+                    }
                 },
                 error: (err) => {
-                    console.log(err);
+                    location.href = 'success.html';
                 }
-
             })
-
         })
     })
 </script>

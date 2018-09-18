@@ -1,0 +1,24 @@
+{
+  "name": "wwys_rs_sign_in",
+  "version": "1.0.0",
+  "description": "万物有声人事签到",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lie-sun/wwys_rs_sign_in.git"
+  },
+  "author": "lie_sun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lie-sun/wwys_rs_sign_in/issues"
+  },
+  "homepage": "https://github.com/lie-sun/wwys_rs_sign_in#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.6.1",
+    "gulp-content": "^1.0.3"
+  }
+}
